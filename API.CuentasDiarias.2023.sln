@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1705.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.CuentasDiarias.2023", "API.CuentasDiarias.2023\API.CuentasDiarias.2023.csproj", "{EC1391BA-2BCC-49A6-8A55-C23ACA35F858}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestructura", "Infraestructura", "{8F5C9781-C2D7-40D3-9B73-AEDC294A11B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transversal", "Transversal", "{B775D89D-2E71-4854-BB30-989392C62F23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aplicacion", "Aplicacion", "{CEEF555A-7746-41D1-8BB5-E69922F33C1E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servicio", "Servicio", "{433071A6-1414-4D7B-AC74-BEE94D1BE19A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestUnit", "TestUnit", "{312A36D1-1AA0-4F7F-A20A-E88A65E6A631}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dominio", "Dominio", "{0BE35C8D-E646-4DE7-99A0-4D46DBF9E656}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.CuentasDiarias.Transversal.Common", "API.CuentasDiarias.Transversal.Common\API.CuentasDiarias.Transversal.Common.csproj", "{6EFADA6F-12E1-4975-8DD3-669C01235444}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC1391BA-2BCC-49A6-8A55-C23ACA35F858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC1391BA-2BCC-49A6-8A55-C23ACA35F858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC1391BA-2BCC-49A6-8A55-C23ACA35F858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC1391BA-2BCC-49A6-8A55-C23ACA35F858}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EFADA6F-12E1-4975-8DD3-669C01235444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EFADA6F-12E1-4975-8DD3-669C01235444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EFADA6F-12E1-4975-8DD3-669C01235444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EFADA6F-12E1-4975-8DD3-669C01235444}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A015B4E5-F9B9-4D64-9E4C-1C3204B0B3AA}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0BE35C8D-E646-4DE7-99A0-4D46DBF9E656} = {CEEF555A-7746-41D1-8BB5-E69922F33C1E}
+		{6EFADA6F-12E1-4975-8DD3-669C01235444} = {B775D89D-2E71-4854-BB30-989392C62F23}
+	EndGlobalSection
+EndGlobal
