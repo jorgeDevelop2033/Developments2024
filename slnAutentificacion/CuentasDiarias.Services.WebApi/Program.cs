@@ -49,7 +49,7 @@ internal partial class Program
         builder.Services.Configure<AppSettings>(appconfig);
 
         builder.Services.AddMapper();
-        builder.Services.AddFeature(config);      
+        builder.Services.AddFeature(config);
 
         builder.Services.InjectionRegistration();
         builder.Services.AddSwagger();
@@ -65,12 +65,12 @@ internal partial class Program
         var Issuer = appSetting.Issuer;
         var Audience = appSetting.Audience;
 
-		builder.Services.AddAuthorization(options =>
-				options.AddPolicy("ElevatedRights", policy =>
-			policy.RequireRole("Administrator", "PowerUser", "BackupAdministrator"))
-		  );
+        builder.Services.AddAuthorization(options =>
+                options.AddPolicy("ElevatedRights", policy =>
+            policy.RequireRole("Administrator", "PowerUser", "BackupAdministrator"))
+          );
 
-		var app = builder.Build();
+        var app = builder.Build();
 
         // Configure the HTTP request pipeline.
         //if (app.Environment.IsDevelopment())
@@ -104,31 +104,31 @@ internal partial class Program
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         });
 
-		
 
-		//Agregando las credenciales para conectarse a watchdog
-		//app.UseWatchDog(conf =>
-		//{
-		//    conf.WatchPagePassword = "admin";
-		//    conf.WatchPageUsername = "admin";
-		//});
-		//app.UseHealthChecks("/health", new HealthCheckOptions
-		//{
-		//    Predicate = _ => true,
-		//    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
-		//    ResultStatusCodes =
-		//        {
-		//            [HealthStatus.Healthy] = StatusCodes.Status200OK,
-		//            [HealthStatus.Degraded] = StatusCodes.Status500InternalServerError,
-		//            [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable,
-		//        },
-		//}).UseHealthChecksUI(setup =>
-		//{
-		//    setup.ApiPath = "/health";
-		//    setup.UIPath = "/health-ui";
-		//});
 
-		app.Run();
+        //Agregando las credenciales para conectarse a watchdog
+        //app.UseWatchDog(conf =>
+        //{
+        //    conf.WatchPagePassword = "admin";
+        //    conf.WatchPageUsername = "admin";
+        //});
+        //app.UseHealthChecks("/health", new HealthCheckOptions
+        //{
+        //    Predicate = _ => true,
+        //    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+        //    ResultStatusCodes =
+        //        {
+        //            [HealthStatus.Healthy] = StatusCodes.Status200OK,
+        //            [HealthStatus.Degraded] = StatusCodes.Status500InternalServerError,
+        //            [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable,
+        //        },
+        //}).UseHealthChecksUI(setup =>
+        //{
+        //    setup.ApiPath = "/health";
+        //    setup.UIPath = "/health-ui";
+        //});
+
+        app.Run();
     }
 }
 

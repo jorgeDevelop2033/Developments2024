@@ -17,15 +17,15 @@ namespace CuentasDiarias.Application.Main
         private readonly IRolesDomain _rolesDomain;
 
         public UsersApplication(IUsersDomain usersDomain, IMapper mapper, UserDTOValidator validationRules, IRolesDomain rolesDomain)
-		{
-			_usersDomain = usersDomain;
-			_mapper = mapper;
-			_validationRules = validationRules;
-			_rolesDomain = rolesDomain;
-		}
+        {
+            _usersDomain = usersDomain;
+            _mapper = mapper;
+            _validationRules = validationRules;
+            _rolesDomain = rolesDomain;
+        }
 
-		public Response<UsersDTO> Authenticate(string username, string password)
-        {            
+        public Response<UsersDTO> Authenticate(string username, string password)
+        {
             var response = new Response<UsersDTO>();
             var validation = _validationRules.Validate(new UsersDTO()
             {
@@ -34,9 +34,10 @@ namespace CuentasDiarias.Application.Main
             });
 
             //if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-            if (!validation.IsValid) {
+            if (!validation.IsValid)
+            {
                 response.Message = "Errores de validacion";
-               // response.Errors = validation.Errors;
+                // response.Errors = validation.Errors;
                 return response;
             }
 
@@ -59,42 +60,42 @@ namespace CuentasDiarias.Application.Main
                 response.Message = "Usuario No existe";
             }
             catch (Exception ex)
-            {                
+            {
                 response.Message = ex.Message;
             }
 
             return response;
         }
 
-		public Response<bool> InsertUsers(UsersDTO users)
-		{
+        public Response<bool> InsertUsers(UsersDTO users)
+        {
             var response = new Response<bool>();
-            
+
             try
             {
                 var entityUsers = _mapper.Map<Users>(users);
 
                 var user = _usersDomain.InsertUsers(entityUsers);
 
-                if (user) 
+                if (user)
                 {
                     response.IsSuccess = true;
                     response.Data = true;
                     response.Message = "Usuario Registrado Correctamente!";
                 }
             }
-			catch (InvalidOperationException)
-			{
-				response.IsSuccess = true;
-				response.Message = "Info Incorrecta!";
-			}
-			catch (Exception ex)
+            catch (InvalidOperationException ex)
+            {
+                response.IsSuccess = true;
+                response.Message = "Info Incorrecta!";
+            }
+            catch (Exception ex)
             {
                 response.Message = ex.Message.ToString();
                 response.IsSuccess = false;
             }
 
             return response;
-		}
-	}
+        }
+    }
 }

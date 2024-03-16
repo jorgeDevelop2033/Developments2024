@@ -36,22 +36,31 @@ namespace CuentasDiarias.Infrastructure.Repository
             }
         }
 
-		public bool InsertUsers(Users users)
-		{
-			using (var connection = _dapperContext.CreateConnection())
-			{
-				var sp = "UserInsert";
-				var parameters = new DynamicParameters(); //libreria Dapper
+        public bool InsertUsers(Users users)
+        {
+            try
+            {
 
-				parameters.Add("FirstName", users.FirstName);
-				parameters.Add("LastName ", users.LastName);
-				parameters.Add("UserName", users.UserName);
-				parameters.Add("Password", users.Password);
+                using (var connection = _dapperContext.CreateConnection())
+                {
+                    var sp = "UserInsert";
+                    var parameters = new DynamicParameters(); //libreria Dapper
 
-				var user = connection.QuerySingle<Users>(sp, param: parameters, commandType: System.Data.CommandType.StoredProcedure);
-			}
+                    parameters.Add("FirstName", users.FirstName);
+                    parameters.Add("LastName ", users.LastName);
+                    parameters.Add("UserName", users.UserName);
+                    parameters.Add("Password", users.Password);
 
-			return true;
-		}
-	}
+                    var user = connection.Query<Users>(sp, param: parameters, commandType: System.Data.CommandType.StoredProcedure);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message.ToString();
+                return false;
+            }
+        }
+    }
 }

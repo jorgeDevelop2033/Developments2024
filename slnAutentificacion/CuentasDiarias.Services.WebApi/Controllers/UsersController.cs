@@ -29,34 +29,34 @@ namespace CuentasDiarias.Services.WebApi.Controllers
         private readonly AppSettings _appSettings;
 
         public UsersController(IUsersApplication usersApplication, IOptions<AppSettings> appSettings, IRolesApplication rolesApplication)
-		{
-			_usersApplication = usersApplication;
-			_appSettings = appSettings.Value;
-			_rolesApplication = rolesApplication;
-		}
+        {
+            _usersApplication = usersApplication;
+            _appSettings = appSettings.Value;
+            _rolesApplication = rolesApplication;
+        }
 
-		[Authorize(Roles = "Administrator,Super")]
-		[HttpPost("InsertUsers")]
+        [Authorize(Roles = "Administrador,Super")]
+        [HttpPost("InsertUsers")]
         public IActionResult InsertUsers([FromBody] UsersDTO users)
         {
             var response = _usersApplication.InsertUsers(users);
 
-			if (response.IsSuccess)
-			{
-				if (response.Data != null)
-				{
-					return Ok(response);
-				}
-				else
-				{
-					return NotFound(response.Message);
-				}
-			}
+            if (response.IsSuccess)
+            {
+                if (response.Data != null)
+                {
+                    return Ok(response);
+                }
+                else
+                {
+                    return NotFound(response.Message);
+                }
+            }
 
-			return BadRequest(response);
+            return BadRequest(response);
 
 
-		}
+        }
 
         [AllowAnonymous]
         [HttpPost("Authenticate")]
@@ -70,7 +70,7 @@ namespace CuentasDiarias.Services.WebApi.Controllers
                 if (response.Data != null)
                 {
                     response.Data.Token = BuildToken(response);
-                    return Ok(response);                
+                    return Ok(response);
                 }
                 else
                 {
@@ -81,22 +81,22 @@ namespace CuentasDiarias.Services.WebApi.Controllers
             return BadRequest(response);
         }
 
-		Claim[] getClaims(Response<UsersDTO> usersDTO,Response<IEnumerable<RolesDTO>> roles)
-		{
-			List<Claim> claims = new List<Claim>();
-			claims.Add(new Claim(JwtRegisteredClaimNames.NameId, usersDTO.Data.UserId.ToString()));
-			claims.Add(new Claim(JwtRegisteredClaimNames.NameId, usersDTO.Data.UserId.ToString()));
-			foreach (var item in roles.Data)
-			{
-				claims.Add(new Claim(ClaimTypes.Role, item.Nombre));
-			}
-			return claims.ToArray();
-		}
-
-
-		private string BuildToken(Response<UsersDTO> usersDTO)
+        Claim[] getClaims(Response<UsersDTO> usersDTO, Response<IEnumerable<RolesDTO>> roles)
         {
-            string secretKey = "mysupersecret_secretkey!123";                        
+            List<Claim> claims = new List<Claim>();
+            claims.Add(new Claim(JwtRegisteredClaimNames.NameId, usersDTO.Data.UserId.ToString()));
+            claims.Add(new Claim(JwtRegisteredClaimNames.NameId, usersDTO.Data.UserId.ToString()));
+            foreach (var item in roles.Data)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, item.Nombre));
+            }
+            return claims.ToArray();
+        }
+
+
+        private string BuildToken(Response<UsersDTO> usersDTO)
+        {
+            string secretKey = "mysupersecret_secretkey!123";
             string audience = "Audience";
             string issuer = "Issuer";
 
@@ -123,7 +123,7 @@ namespace CuentasDiarias.Services.WebApi.Controllers
             //});
 
             var subject = new ClaimsIdentity(
-                getClaims(usersDTO,roles)
+                getClaims(usersDTO, roles)
                 );
 
 
@@ -136,7 +136,7 @@ namespace CuentasDiarias.Services.WebApi.Controllers
                 Expires = expires,
                 Issuer = issuer,
                 Audience = audience,
-                SigningCredentials = signingCredentials                
+                SigningCredentials = signingCredentials
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -179,6 +179,6 @@ namespace CuentasDiarias.Services.WebApi.Controllers
             return jwtToken;
         }
 
-        
+
     }
 }
