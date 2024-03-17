@@ -35,7 +35,7 @@ namespace CuentasDiarias.Services.WebApi.Controllers
             _rolesApplication = rolesApplication;
         }
 
-        [Authorize(Roles = "Administrador,Super")]
+        [AllowAnonymous]
         [HttpPost("InsertUsers")]
         public IActionResult InsertUsers([FromBody] UsersDTO users)
         {
