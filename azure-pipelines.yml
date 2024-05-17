@@ -53,5 +53,13 @@ steps:
     ConnectionType: 'AzureRM'
     azureSubscription: 'Suscripción de Azure 1(8bbebb30-f76b-4c12-bcc7-ea5941267e61)'
     appType: 'webApp'
-    WebAppName: 'basura2024'
+    WebAppName: 'webproductos'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/webApi/*.zip'
+    
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Suscripción de Azure 1(8bbebb30-f76b-4c12-bcc7-ea5941267e61)'
+    appType: 'webApp'
+    WebAppName: 'webapigastos'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/APIGastosDiarios/*.zip'
