@@ -18,12 +18,14 @@ steps:
     version: 7.x
     performMultiLevelLookup: true
     includePreviewVersions: true # Required for preview versions
+
 - task: DotNetCoreCLI@2
   displayName: 'Build: WebAPI ' 
   inputs:
     command: build
     projects: '**/WebApi/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
+
 - task: DotNetCoreCLI@2
   displayName: dotnet publish backend --configuration $(buildConfiguration)
   name: PublishWebApi
@@ -33,6 +35,17 @@ steps:
     projects: '**/WebApi/*.csproj'
     publishWebProjects: false
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)/webApi'
+    zipAfterPublish: true
+
+ - task: DotNetCoreCLI@2
+  displayName: dotnet publish WebGastos backend --configuration $(buildConfiguration)
+  name: PublishWebApiGastos
+  
+  inputs:
+    command: publish
+    projects: '**/APIGastosDiarios/*.csproj'
+    publishWebProjects: false
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)/APIGastosDiarios'
     zipAfterPublish: true
     
 - task: AzureRmWebAppDeployment@4
