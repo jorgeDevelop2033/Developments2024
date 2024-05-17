@@ -37,7 +37,7 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)/webApi'
     zipAfterPublish: true
 
- - task: DotNetCoreCLI@2
+- task: DotNetCoreCLI@2
   displayName: dotnet publish WebGastos backend --configuration $(buildConfiguration)
   name: PublishWebApiGastos
   
@@ -51,7 +51,7 @@ steps:
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
-    azureSubscription: 'Suscripción de Azure 1(8bbebb30-f76b-4c12-bcc7-ea5941267e61)'
+    azureSubscription: 'SuscripciÃ³n de Azure 1(8bbebb30-f76b-4c12-bcc7-ea5941267e61)'
     appType: 'webApp'
     WebAppName: 'basura2024'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/webApi/*.zip'
