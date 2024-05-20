@@ -4,18 +4,36 @@
       //enpoint consulta 
       //primero el pedido interno - el datos de micro 
       //url interna
-      "DownstreamPathTemplate": "/api/productos/todoslosproductos",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/Producto/ObtenerTodosProductosd",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7019
+          "Host": "localhost", //"webproductos.azurewebsites.net",
+          "Port": 5069
         }
       ],
-      "UpstreamPathTemplate": "/api/posts",
+      "UpstreamPathTemplate": "/Producto",
       "UpstreamHttpMethod": [ "Get" ]
+      
+    },
+    {
+      //enpoint consulta 
+      //primero el pedido interno - el datos de micro 
+      //url interna
+      "DownstreamPathTemplate": "/api/Producto/ObtenerProductoId/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost", //"webproductos.azurewebsites.net",
+          "Port": 5069
+        }
+      ],
+      "UpstreamPathTemplate": "/Producto/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+      
     }
   ],
+ 
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:5000"
   }
